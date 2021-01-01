@@ -1,0 +1,83 @@
+import java.io.*;
+import java.util.*;
+
+public class HelloWorld{
+    
+    //brute force
+    //time - O(n)
+    //space - O(1)
+    /*static void findMinMax(int[] arr,int n){
+        int min=arr[0];
+        int max=arr[0];
+        for(int i=0;i<n;i++){
+            if(arr[i]<min){
+                min=arr[i];
+            }
+            if(arr[i]>max){
+                max=arr[i];
+            }
+        }
+        System.out.print(min+" "+max);
+    }*/
+    
+    //divide and conquore approach
+    static class Pair{
+        int min;
+        int max;
+    }
+    static Pair findMinMax(int[] arr,int low,int high){
+        Pair minmax=new Pair();
+        Pair mml=new Pair();
+        Pair mmr=new Pair();
+        //if n==1
+        if(low==high){
+            minmax.min=arr[low];
+            minmax.max=arr[high];
+            return minmax;
+        }
+        //if n==2
+        if(high==low+1){
+            if(arr[low]>arr[high]){
+                minmax.min=arr[high];
+                minmax.max=arr[low];
+            }else{
+                minmax.min=arr[low];
+                minmax.max=arr[high];
+            }
+            return minmax;
+        }
+        int mid=(low+high)/2;
+        mml=findMinMax(arr,low,mid);
+        mmr=findMinMax(arr,mid+1,high);
+        if(mml.min<mmr.min){
+            minmax.min=mml.min;
+        }
+        else{
+            minmax.min=mmr.min;
+        }
+        if(mml.max<mmr.max){
+            minmax.max=mmr.max;
+        }
+        else{
+            minmax.max=mml.max;
+        }
+        return minmax;
+        
+    }
+  
+     public static void main(String []args){
+        Scanner sc=new Scanner(System.in);
+        int t=sc.nextInt();
+        while(t--!=0){
+            int n=sc.nextInt();
+            int[] arr=new int[n];
+            for(int i=0;i<n;i++){
+                arr[i]=sc.nextInt();
+            }
+        // findMinMax(arr,n);
+        Pair minmax=findMinMax(arr,0,n-1);
+        System.out.print(minmax.min+" "+minmax.max);
+        System.out.println();
+      }
+     }
+}
