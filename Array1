@@ -1,0 +1,67 @@
+import java.io.*;
+import java.util.*;
+
+public class HelloWorld{
+    
+    //brute force
+    //time - O(n)
+    //space - O(n)
+    /*static int[] reverse(int[] arr,int n){
+        int[] tempArr=new int[n];
+        int j=0;
+        for(int i=n-1;i>=0;i--){
+               tempArr[j++]=arr[i];
+        }
+        return tempArr;
+        
+    }*/
+    
+    //optimize
+    //time - O(n)
+    //space - O(1)
+    /*static int[] reverse(int[] arr,int n){
+        int start=0;
+        int end=n-1;
+        while(start<end){
+            int temp=arr[start]; 
+            arr[start]=arr[end];
+            arr[end]=temp;
+            start++;
+            end--;
+        } 
+        return arr;
+    }*/
+    
+     //recursive
+    //time - O(n)
+    //space - O(1)
+    static void reverseRecursive(int[] arr,int n,int start,int end){
+            if(start>=end){
+                return;
+            }
+            int temp=arr[start]; 
+            arr[start]=arr[end];
+            arr[end]=temp;
+            reverseRecursive(arr,n,start+1,end-1);
+    }
+
+     public static void main(String []args){
+        Scanner sc=new Scanner(System.in);
+        int t=sc.nextInt();
+        while(t--!=0){
+            int n=sc.nextInt();
+            int[] arr=new int[n];
+            for(int i=0;i<n;i++){
+                arr[i]=sc.nextInt();
+            }
+            //int[] resultArr= reverse(arr,n);
+            /* for(int i=0;i<n;i++){
+                System.out.print(resultArr[i]+" ");
+            }*/
+            reverseRecursive(arr,n,0,n-1);
+            for(int i=0;i<n;i++){
+                System.out.print(arr[i]+" ");
+            }
+      }
+     }
+}
