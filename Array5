@@ -1,0 +1,144 @@
+/*package whatever //do not write package name here */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class GFG {
+    
+    //Merge sort(1st method)
+    //Time (O(n*log(n)))
+    
+    
+    static void swap(int arr[],int i,int j){
+        int temp=arr[i];
+        arr[i]=arr[j];
+        arr[j]=temp;
+    }
+    //Bubble sort(2nd method)
+    //Time(O(n2))
+    /*static void moveNegativeToEnd(int arr[],int n){
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n-1;j++){
+                if(arr[j]<0){
+                    swap(arr,j,j+1);
+                }
+            }
+        }
+        
+    }*/
+    //brute force
+    //Time(O(n))
+    //not in order
+    // static void moveNegativeToEnd(int arr[],int n){
+    //  int start=0;
+    //  int end=n-1;
+    //  while(start<=end){
+    //   if(arr[start]<0){
+    //         swap(arr,start,end);
+    //         end--;
+    //         if(arr[start]>0){
+    //             start++;
+    //         }
+    //     }else{
+    //          start++;
+    //      }
+    //  }
+    //  for(int i=0;i<n;i++){
+    //       System.out.print(arr[i]+" ");
+    //     }
+    // }
+    
+    //time limit exceed
+    //Time (O(2n))
+    //time limit exeeded
+    //
+    // static void moveNegativeToEnd(int arr[],int n){
+    //     int tempArr[]=new int[n];
+    //     int tempArr2[]=new int[n];
+    //     int tempArr3[]=new int[n];
+    //     int x=0;
+    //     int z=0;
+    //     int y=0;
+    //     int p=0;
+    //     for(int i=0;i<n;i++){
+    //         if(arr[i]<0){
+    //             tempArr[x++]=arr[i];
+    //         }else if(arr[i]>0){
+    //             arr[i]=arr[i];
+    //         }else{
+    //             tempArr3[p++]=arr[i];
+    //         }
+    //     }
+    //     for(int i=0;i<z;i++){
+    //       System.out.print(tempArr2[i]+" ");
+           
+    //     }
+    //     for(int i=0;i<p;i++){
+    //       System.out.print(tempArr3[i]+" ");
+           
+    //     }
+    //      for(int i=0;i<x;i++){
+    //       System.out.print(tempArr[i]+" ");
+    //     }
+    // }
+    
+    //dutch flag
+    //  static void moveNegativeToEnd(int arr[],int n){
+    //  int start=0;
+    //  int mid=0;
+    //  int end=n-1;
+    //  while(start<=end){
+    //     if(arr[mid]>0){
+    //         swap(arr,start,mid);
+    //         mid++;
+    //         start++;
+    //     }else if(arr[mid]<0){
+    //         swap(arr,mid,end);
+    //         end--;
+    //     }else{
+    //         mid++;
+    //     }
+    //  }
+    //  for(int i=0;i<n;i++){
+    //       System.out.print(arr[i]+" ");
+    //     }
+    // }
+    
+   //Array Rotation
+   static void moveNegativeToEnd(int arr[],int n){
+       int[] temp=new int[n];
+       int x=0;
+       for(int i=0;i<n;i++){
+           if(arr[i]>=0){
+               temp[x++]=arr[i];
+           }
+       }
+       if (x == n || x == 0) 
+            return; 
+       for(int i=0;i<n;i++){
+           if(arr[i]<0){
+               temp[x++]=arr[i];
+           }
+       }
+        for(int i=0;i<n;i++){
+          arr[i]=temp[i];
+       }
+    }
+
+	public static void main (String[] args) {
+		Scanner sc=new Scanner(System.in);
+		int t=sc.nextInt();
+		while(t--!=0){
+		    int n=sc.nextInt();
+		    int[] arr=new int[n];
+		    for(int i=0;i<n;i++){
+		        arr[i]=sc.nextInt();
+		    }
+		    moveNegativeToEnd(arr,n);
+		    for (int i = 0; i < n; i++) 
+                 System.out.print(arr[i] + " "); 
+		    System.out.println();
+		}
+	}
+}
